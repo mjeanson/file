@@ -3,7 +3,7 @@
 # $File: ctf,v 1.5 2024/06/10 23:09:52 christos Exp $
 # ctf:  file(1) magic for CTF (Common Trace Format) trace files
 #
-# Specs. available here: <https://www.efficios.com/ctf>
+# Specs. available here: <https://diamon.org/ctf/>
 #--------------------------------------------------------------
 
 # CTF trace data
@@ -22,3 +22,8 @@
 0	string	/*\x20CTF\x20   Common Trace Format (CTF) plain text metadata
 !:strength + 5			# this is to make sure we beat C
 >&0	regex	[0-9]+\\.[0-9]+	\b, v%s
+
+# CTF 2 JSON metadata
+0	string	\x1e{
+>2	regex/c/l/10	"type"[[:blank:]]*:[[:blank:]]*"preamble"
+>>2	regex/c/l/10	"version"[[:blank:]]*:[[:blank:]]*2		Common Trace Format 2 (CTF2) JSON metadata
